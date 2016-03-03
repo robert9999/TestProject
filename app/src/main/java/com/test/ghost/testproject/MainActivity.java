@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
             String targetUrl = "http://bebetrack.com/api/create";
 
-            JSONObject postObj = new JSONObject();
+            JSONObject postObj = new JSONObject();//make json object of parameter
             try {
                 postObj = new JSONObject();
                 postObj.accumulate("phone" ,"1246");
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            String response = Net.excutePostJson(targetUrl,postObj);
+            String response = Net.excutePostJson(targetUrl,postObj);//send json data
 
             return response;
         }
@@ -79,8 +79,10 @@ public class MainActivity extends AppCompatActivity {
             }
             try {
 
-                JSONObject resObj = new JSONObject(response);
-                Toast.makeText(MainActivity.this,resObj.getString("pin"), Toast.LENGTH_LONG).show();
+                JSONObject resObj = new JSONObject(response);//convert string to json object
+                Toast.makeText(MainActivity.this,resObj.getString("pin"), Toast.LENGTH_LONG).show();//show pin
+                Preference.saveText(MainActivity.this, "UserToken", resObj.getString("token"));//save token
+
             }catch (JSONException e){
 
             }
